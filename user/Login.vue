@@ -14,20 +14,22 @@
     <app-content-section>
       <div class="content-wrapper">
 
-        <div class="row row-centered">
-          <div class="col col-large-6">
+        <div class="row row-centered row-centered">
 
-            <div class="content-subsection">
-              <h2 class="heading">Anmelden</h2>
+          <div class="col col-large-5 col-wrapping col-large-no-bottom-margin">
+
+              <h2 class="heading">Login</h2>
               <login-form></login-form>
-            </div>
-
-            <div class="content-subsection">
-              <h2 class="subheading">Registrieren</h2>
-              <register-form></register-form>
-            </div>
 
           </div>
+
+          <div class="col col-large-5 col-wrapping col-no-bottom-margin">
+
+              <h2 class="heading">Create an Account</h2>
+              <register-form></register-form>
+
+          </div>
+
         </div>
 
       </div>
