@@ -14,7 +14,7 @@
     <app-content-section>
       <div class="content-wrapper">
 
-        <div class="row row-centered row-centered">
+        <div class="row row-centered">
 
           <div class="col col-tablet-portrait-10 col-large-5 col-large-after-2 col-xlarge-4 col-xlarge-after-2 col-wrapping col-large-no-bottom-margin">
             <h2 class="heading">Create Your Account</h2>
@@ -26,7 +26,7 @@
               <div class="content-subsection">
                 <p class="lead">Already registered?</p>
               </div>
-            
+
               <div class="content-subsection">
                 <h2 class="heading">Login</h2>
                 <login-form></login-form>
