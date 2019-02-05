@@ -16,18 +16,14 @@
 
         <div class="row row-centered row-centered">
 
-          <div class="col col-large-5 col-wrapping col-large-no-bottom-margin">
-
-              <h2 class="heading">Login</h2>
-              <login-form></login-form>
-
+          <div class="col col-tablet-portrait-10 col-large-5 col-large-after-2 col-xlarge-4 col-xlarge-after-2 col-wrapping col-large-no-bottom-margin">
+            <h2 class="heading">Create Your Account</h2>
+            <register-form></register-form>
           </div>
 
-          <div class="col col-large-5 col-wrapping col-no-bottom-margin">
-
-              <h2 class="heading">Create an Account</h2>
-              <register-form></register-form>
-
+          <div class="col col-tablet-portrait-10 col-large-5 col-xlarge-4 col-wrapping col-no-bottom-margin">
+              <h2 class="heading">Login</h2>
+              <login-form></login-form>
           </div>
 
         </div>
