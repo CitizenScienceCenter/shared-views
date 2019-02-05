@@ -22,8 +22,16 @@
           </div>
 
           <div class="col col-tablet-portrait-10 col-large-5 col-xlarge-4 col-wrapping col-no-bottom-margin">
-              <h2 class="heading">Login</h2>
-              <login-form></login-form>
+
+              <div class="content-subsection">
+                <p class="lead">Already registered?</p>
+              </div>
+            
+              <div class="content-subsection">
+                <h2 class="heading">Login</h2>
+                <login-form></login-form>
+              </div>
+
           </div>
 
         </div>
