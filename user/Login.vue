@@ -6,7 +6,7 @@
   "page-title": "Login / Register",
 
   "heading-register": "Create Your Account",
-  "heading-login": "Create Your Account"
+  "heading-login": "Login"
 
   },
 
@@ -14,8 +14,8 @@
 
   "page-title": "Anmelden / Registrieren",
 
-  "heading-register": "Create Your Account",
-  "heading-login": "Create Your Account"
+  "heading-register": "Erstelle deinen Account",
+  "heading-login": "Anmelden"
 
   }
 
