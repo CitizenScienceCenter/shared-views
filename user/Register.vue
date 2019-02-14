@@ -1,3 +1,22 @@
+<i18n>
+  {
+
+  "en": {
+
+  "page-title": "Register"
+
+  },
+
+  "de": {
+
+  "page-title": "Registrieren"
+
+  }
+
+  }
+</i18n>
+
+
 <template>
   <div>
     <app-content-section>
@@ -20,6 +39,7 @@
 </template>
 
 <script>
+
 import { mapState, mapGetters } from "vuex";
 import RegisterForm from "@/components/shared/RegisterForm.vue";
 import ContentSection from '@/components/shared/ContentSection.vue'
@@ -31,6 +51,11 @@ export default {
     RegisterForm,
       'app-content-section': ContentSection,
       'app-footer': Footer
-  }
+  },
+    metaInfo: function() {
+        return {
+            title: this.$t('page-title')
+        }
+    }
 };
 </script>

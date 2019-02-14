@@ -1,6 +1,9 @@
 <i18n>
     {
     "en": {
+
+    "page-title": "Privacy Policy & Terms of use",
+
     "privacy-heading": "Privacy Policy",
     "privacy-text-1": "Any personal data you supply to our online platform are processed in accordance with the SwissData Protection Act (<a href='https://iclg.com/practice-areas/data-protection-laws-and-regulations/switzerland' target='_blank'>DSG</a>) and the EU General Data Protection Regulation (<a href='https://eugdpr.org/' target='_blank'>GDPR</a>).",
 
@@ -17,8 +20,13 @@
     "terms-text": "The major goal for the Wenker project is to make the data that you contribute available to the researchers to further scientific research.<br>You retain ownership of any contribution you make to the data (translation or transcription) and you may use, distribute or modify your individual contribution in any way you like.<br>However, by contributing to the Wenker Project, you grant us and our collaborators permission to use your contributions however we like to further this scientific goal.",
 
     "section-newsletter-heading": "Sign up for our Newsletter"
+
     },
+
     "de": {
+
+    "page-title": "Privacy Policy & Terms of use",
+
     "privacy-heading": "Privacy Policy",
     "privacy-text-1": "Any personal data you supply to our online platform are processed in accordance with the SwissData Protection Act (<a href='https://iclg.com/practice-areas/data-protection-laws-and-regulations/switzerland' target='_blank'>DSG</a>) and the EU General Data Protection Regulation (<a href='https://eugdpr.org/' target='_blank'>GDPR</a>).",
 
@@ -35,6 +43,7 @@
     "terms-text": "The major goal for the Wenker project is to make the data that you contribute available to the researchers to further scientific research.<br>You retain ownership of any contribution you make to the data (translation or transcription) and you may use, distribute or modify your individual contribution in any way you like.<br>However, by contributing to the Wenker Project, you grant us and our collaborators permission to use your contributions however we like to further this scientific goal.",
 
     "section-newsletter-heading": "Sign up for our Newsletter"
+
     }
     }
 </i18n>
@@ -109,6 +118,11 @@
             'app-content-section': ContentSection,
             'app-newsletter-signup': NewsletterSignup,
             'app-footer': Footer
+        },
+        metaInfo: function() {
+            return {
+                title: this.$t('page-title')
+            }
         }
     }
 

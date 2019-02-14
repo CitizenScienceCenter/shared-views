@@ -1,15 +1,26 @@
 <i18n>
   {
-    "de": {
-      "heading": "Passwort zurücksetzen",
-      "label-email": "Email",
-      "button-reset": "Zurücksetzen"
-    },
-    "en": {
-      "heading": "Reset Password",
-      "label-email": "Email",
-      "button-reset": "Reset"
-    }
+
+  "en": {
+
+  "page-title": "Reset Password",
+
+  "heading": "Reset Password",
+  "label-email": "Email",
+  "button-reset": "Reset"
+
+  },
+
+  "de": {
+
+  "page-title": "Passwort zurücksetzen",
+
+  "heading": "Passwort zurücksetzen",
+  "label-email": "Email",
+  "button-reset": "Zurücksetzen"
+
+  }
+
   }
 </i18n>
 
@@ -63,6 +74,11 @@ export default {
   computed: mapState({
     loading: state => state.settings.loading
   }),
+    metaInfo: function() {
+        return {
+            title: this.$t('page-title')
+        }
+    },
   mounted() {
   },
   methods: {

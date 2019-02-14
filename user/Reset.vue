@@ -1,16 +1,26 @@
 <i18n>
 {
-"de": {
-        "heading": "Passwort zurücksetzen",
-        "label-email": "Email",
-        "label-password": "Passwort",
-        "button-reset": "Zurücksetzen"
-    },
+
     "en": {
-        "heading": "Reset Password",
-        "label-email": "Email",
-        "label-password": "Password",
-        "button-reset": "Reset"
+
+    "page-title": "Reset Password",
+
+    "heading": "Reset Password",
+    "label-email": "Email",
+    "label-password": "Password",
+    "button-reset": "Reset"
+
+    },
+
+    "de": {
+
+    "page-title": "Passwort zurücksetzen",
+
+    "heading": "Passwort zurücksetzen",
+    "label-email": "Email",
+    "label-password": "Passwort",
+    "button-reset": "Zurücksetzen"
+
     }
 }
 </i18n>
@@ -75,6 +85,11 @@ export default {
         }
       }
   },
+    metaInfo: function() {
+        return {
+            title: this.$t('page-title')
+        }
+    },
   computed: mapState({
     loading: state => state.settings.loading,
     error: state => state.settings.error
