@@ -36,19 +36,21 @@
 
                     <h2 class="heading">{{ $t('heading') }}</h2>
                     <form @submit.prevent="reset">
-                        <div class="form-field">
-                        <label for="pwd">{{ $t("label-email") }}</label>
-                        <input v-model="password" type="password" id="password" name="password" autocomplete="password" :disabled="loading" />
-                        <span class="error" v-if="errors.len">Muss mehr als 8 Zeichen lang sein.</span>
+                        <div class="form-field form-field-block">
+                            <label for="password">{{ $t("label-email") }}</label>
+                            <input v-model="password" type="password" id="password" name="password" autocomplete="password" :disabled="loading" />
+                            <span class="message error" v-if="errors.len">Muss mehr als 8 Zeichen lang sein.</span>
                         </div>
-                        <div class="form-field">
-                        <label for="pwd">{{ $t("label-password") }}</label>
-                        <input v-model="confPassword" type="password" id="password" name="password" autocomplete="password" :disabled="loading" />
-                        <span class="error" v-if="errors.match">Passwörter stimmen nicht überein</span>
+                        <div class="form-field form-field-block">
+                            <label for="password-repeat">{{ $t("label-password") }}</label>
+                            <input v-model="confPassword" type="password" id="password-repeat" name="password-repeat" autocomplete="password" :disabled="loading" />
+                            <span class="message error" v-if="errors.match">Passwörter stimmen nicht überein</span>
                         </div>
 
-                        <button type="submit" class="button button-primary" :disabled="loading">{{ $t('button-reset') }}</button>
-                        <span class="error" v-if="error">{{error}}</span>
+                        <div class="button-group right-aligned">
+                            <button type="submit" class="button button-primary" :disabled="loading">{{ $t('button-reset') }}</button>
+                        </div>
+                        <span class="message error" v-if="error">{{error}}</span>
                     </form>
 
                   </div>
@@ -94,27 +96,30 @@ export default {
     loading: state => state.settings.loading,
     error: state => state.settings.error
   }),
-  mounted() {const id = this.$route.params.token.split('.')[0]
-        console.log(id)
+  mounted() {
+      console.log('reset mounted');
+      const id = this.$route.params.token.split('.')[0];
+      console.log(id)
   },
   methods: {
       reset() {
-      if (this.password.length >= 8 && this.confPassword === this.password) {
-        const id = this.$route.params.token.split('.')[0]
-        const reset = {
-          id: id,
-          token: this.$route.params.token,
-          pwd: this.password
-        }
-        this.$store.dispatch('user/resetPwd', reset).then(r => {
-            if(r !== false) {
-                this.$router.push('/welcome')
+          console.log('reset');
+          if (this.password.length >= 8 && this.confPassword === this.password) {
+            const id = this.$route.params.token.split('.')[0]
+            const reset = {
+              id: id,
+              token: this.$route.params.token,
+              pwd: this.password
             }
-          })
-      } else {
-        this.errors.match = this.password !== this.confPassword
-        this.errors.len = this.password.length <= 8
-      }
+            this.$store.dispatch('user/resetPwd', reset).then(r => {
+                if(r !== false) {
+                    this.$router.push('/welcome')
+                }
+              })
+          } else {
+            this.errors.match = this.password !== this.confPassword
+            this.errors.len = this.password.length <= 8
+          }
     }
   }
 };

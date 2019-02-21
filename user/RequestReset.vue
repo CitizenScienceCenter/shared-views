@@ -34,12 +34,14 @@
             <div class="col col-large-6">
 
               <h2 class="heading">{{ $t('heading') }}</h2>
-              <form @submit.prevent="request">
-                <div class="form-field">
+              <form>
+                <div class="form-field form-field-block">
                   <label for="email">{{ $t("label-email") }}</label>
                   <input v-model="email" type="email" name="email" id="email" autocomplete="email" :disabled="loading" />
                 </div>
-                <button type="submit" class="button button-primary" :disabled="loading">{{ $t('button-reset') }}</button>
+                <div class="button-group right-aligned">
+                  <button @click.prevent="request" type="submit" class="button button-primary" :disabled="loading">{{ $t('button-reset') }}</button>
+                </div>
             </form>
             <p v-if="success" class="success">Bitte überprüfe deine E-Mails</p>
 
@@ -82,22 +84,20 @@ export default {
   mounted() {
   },
   methods: {
+
     request() {
-      this.$store.dispatch('user/requestReset', this.email).then(res => {
-        console.log(res)
+        console.log('dispatch request');
+      this.$store.dispatch('c3s/user/requestReset', this.email ).then(res => {
+          console.log('request came back');
+        console.log(res);
         if (res) {
           this.success = true
         }
-      })
+      });
+
     }
+
   }
 };
 </script>
 
-<style scoped>
-
-  .form-field {
-    display: block;
-  }
-
-</style>
