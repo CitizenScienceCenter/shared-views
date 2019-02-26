@@ -7,7 +7,9 @@
 
   "heading": "Reset Password",
   "label-email": "Email",
-  "button-reset": "Reset"
+  "button-reset": "Reset",
+
+  "info-check-mail": "You'll find an email with a link to reset the password."
 
   },
 
@@ -17,7 +19,9 @@
 
   "heading": "Passwort zurücksetzen",
   "label-email": "Email",
-  "button-reset": "Zurücksetzen"
+  "button-reset": "Zurücksetzen",
+
+  "info-check-mail": "In deinen Mails findest du einen Link zum zurücksetzen des Passworts."
 
   }
 
@@ -43,7 +47,7 @@
                   <button @click.prevent="request" type="submit" class="button button-primary" :disabled="loading">{{ $t('button-reset') }}</button>
                 </div>
             </form>
-            <p v-if="success" class="success">Bitte überprüfe deine E-Mails</p>
+            <p v-if="success" class="success">{{ $t('info-check-mail') }}</p>
 
             </div>
           </div>

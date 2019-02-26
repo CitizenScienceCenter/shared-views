@@ -6,9 +6,12 @@
     "page-title": "Reset Password",
 
     "heading": "Reset Password",
-    "label-email": "Email",
     "label-password": "Password",
-    "button-reset": "Reset"
+    "label-password-repeat": "Repeat Password",
+    "button-reset": "Reset",
+
+    "error-length": "Has to be more than 8 characters.",
+    "error-match": "Passwords don't match."
 
     },
 
@@ -17,9 +20,12 @@
     "page-title": "Passwort zurücksetzen",
 
     "heading": "Passwort zurücksetzen",
-    "label-email": "Email",
-    "label-password": "Passwort",
-    "button-reset": "Zurücksetzen"
+    "label-password": "Password",
+    "label-password-repeat": "Password wiederholen",
+    "button-reset": "Zurücksetzen",
+
+    "error-length": "Muss mehr als 8 Zeichen lang sein.",
+    "error-match": "Passwörter stimmen nicht überein."
 
     }
 }
@@ -37,14 +43,14 @@
                     <h2 class="heading">{{ $t('heading') }}</h2>
                     <form @submit.prevent="reset">
                         <div class="form-field form-field-block">
-                            <label for="password">{{ $t("label-email") }}</label>
+                            <label for="password">{{ $t("label-password") }}</label>
                             <input v-model="password" type="password" id="password" name="password" autocomplete="password" :disabled="loading" />
-                            <span class="message error" v-if="errors.len">Muss mehr als 8 Zeichen lang sein.</span>
+                            <span class="message error" v-if="errors.len">{{ $t("error-length") }}</span>
                         </div>
                         <div class="form-field form-field-block">
-                            <label for="password-repeat">{{ $t("label-password") }}</label>
+                            <label for="password-repeat">{{ $t("label-password-repeat") }}</label>
                             <input v-model="confPassword" type="password" id="password-repeat" name="password-repeat" autocomplete="password" :disabled="loading" />
-                            <span class="message error" v-if="errors.match">Passwörter stimmen nicht überein</span>
+                            <span class="message error" v-if="errors.match">{{ $t("error-match") }}</span>
                         </div>
 
                         <div class="button-group right-aligned">
@@ -105,19 +111,19 @@ export default {
       reset() {
           console.log('reset');
           if (this.password.length >= 8 && this.confPassword === this.password) {
-            const id = this.$route.params.token.split('.')[0]
+            const id = this.$route.params.token.split('.')[0];
             const reset = {
               id: id,
               token: this.$route.params.token,
               pwd: this.password
             }
-            this.$store.dispatch('user/resetPwd', reset).then(r => {
+            this.$store.dispatch('c3s/user/resetPwd', reset).then(r => {
                 if(r !== false) {
-                    this.$router.push('/welcome')
+                    this.$router.push('/')
                 }
               })
           } else {
-            this.errors.match = this.password !== this.confPassword
+            this.errors.match = this.password !== this.confPassword;
             this.errors.len = this.password.length <= 8
           }
     }
