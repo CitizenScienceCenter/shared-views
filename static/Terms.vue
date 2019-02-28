@@ -101,7 +101,7 @@
             </div>
         </app-content-section>
 
-        <app-footer></app-footer>
+        <app-footer :platform="platform"></app-footer>
 
     </div>
 </template>
@@ -114,6 +114,12 @@
 
     export default {
         name: 'Terms',
+        props: {
+            platform: {
+                type: Boolean,
+                default: false
+            }
+        },
         components: {
             'app-content-section': ContentSection,
             'app-newsletter-signup': NewsletterSignup,

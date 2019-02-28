@@ -46,7 +46,7 @@
       </div>
     </app-content-section>
 
-    <app-footer></app-footer>
+    <app-footer :platform="platform"></app-footer>
 
   </div>
 </template>
@@ -59,6 +59,12 @@
 
   export default {
   name: "Login",
+      props: {
+          platform: {
+              type: Boolean,
+              default: false
+          }
+      },
   components :{
     LoginForm,
       RegisterForm,
