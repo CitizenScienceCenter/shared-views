@@ -44,7 +44,7 @@
 </i18n>
 
 <template>
-    <div v-if="user">
+    <div v-if="currentUser">
         <app-content-section>
             <div class="content-wrapper">
 
@@ -55,12 +55,12 @@
                             <h2 class="heading">{{ $t('heading') }}</h2>
 
                             <div class="form-field form-field-block">
-                                <label>{{ $t('label-username') }}</label>
-                                <p>{{ user.username }}</p>
+                                <label>{{ $t('label-email') }}</label>
+                                <p>{{ currentUser.email }}</p>
                             </div>
                             <div class="form-field form-field-block">
-                                <label>{{ $t('label-email') }}</label>
-                                <p>{{ user.email }}</p>
+                                <label>{{ $t('label-username') }}</label>
+                                <p>{{ currentUser.username }}</p>
                             </div>
 
                         </div>
@@ -103,8 +103,8 @@
         },
         computed: {
             ...mapState({
-                //user: state => state.user.user,
-                user: state => state.c3s.user.currentUser,
+                user: state => state.user.user,
+                currentUser: state => state.c3s.user.currentUser,
                 loading: state => state.settings.loading,
 
                 challengeState: state => state.consts.challengeState

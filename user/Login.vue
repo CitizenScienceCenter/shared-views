@@ -30,15 +30,13 @@
         <div class="row row-centered">
 
           <div class="col col-tablet-portrait-10 col-large-5 col-large-after-2 col-xlarge-4 col-xlarge-after-2 col-wrapping col-large-no-bottom-margin">
-            <h2 class="heading">{{ $t('heading-register') }}</h2>
-            <register-form></register-form>
+            <h2 class="heading">{{ $t('heading-login') }}</h2>
+            <login-form></login-form>
           </div>
 
           <div class="col col-tablet-portrait-10 col-large-5 col-xlarge-4 col-wrapping col-no-bottom-margin">
-
-              <h2 class="heading">{{ $t('heading-login') }}</h2>
-              <login-form></login-form>
-
+            <h2 class="heading">{{ $t('heading-register') }}</h2>
+            <register-form></register-form>
           </div>
 
         </div>
