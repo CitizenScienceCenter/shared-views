@@ -5,7 +5,7 @@
 
   "page-title": "Login / Register",
 
-  "heading-register": "Create Your Account",
+  "heading-register": "Not Registered yet? Create Your Account",
   "heading-login": "Login"
 
   },
@@ -14,7 +14,7 @@
 
   "page-title": "Anmelden / Registrieren",
 
-  "heading-register": "Erstelle deinen Account",
+  "heading-register": "Noch keinen Login? Erstelle deinen Account",
   "heading-login": "Anmelden"
 
   }
@@ -29,7 +29,7 @@
 
         <div class="row row-centered">
 
-          <div class="col col-tablet-portrait-10 col-large-5 col-large-after-2 col-xlarge-4 col-xlarge-after-2 col-wrapping col-large-no-bottom-margin">
+          <div class="col col-tablet-portrait-10 col-large-5 col-large-after-1 col-xlarge-4 col-xlarge-after-2 col-wrapping col-large-no-bottom-margin">
             <h2 class="heading">{{ $t('heading-login') }}</h2>
             <login-form></login-form>
           </div>
