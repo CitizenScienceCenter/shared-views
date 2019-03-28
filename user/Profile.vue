@@ -17,7 +17,8 @@
     "submission-translation-suffix": " sentences.",
     "thanks": "Thanks for helping!",
     "button-logout": "Logout",
-    "button-reset": "Reset Password"
+    "button-reset": "Reset Password",
+    "button-save": "Save"
     },
 
     "de": {
@@ -36,7 +37,8 @@
     "submission-translation-suffix": " Sätze übersetzt",
     "thanks": "Vielen Dank für Deine Hilfe!",
     "button-logout": "Ausloggen",
-    "button-reset": "Passwort zurücksetzen"
+    "button-reset": "Passwort zurücksetzen",
+    "button-save": "Speichern"
 
     }
 
@@ -60,16 +62,18 @@
                             </div>
                             <div class="form-field form-field-block">
                                 <label>{{ $t('label-username') }}</label>
-                                <p>{{ currentUser.username }}</p>
+                                <input v-model="username" id="reg-username" name="reg-email" autocomplete="new-password" :disabled="loading" />
+                                <span class="message error" v-if="errors.username">{{ $t("error-username") }}</span>
                             </div>
 
                         </div>
 
                         <div class="content-subsection">
-                            <div class="button-group">
+                            <div class="button-group right-aligned">
                                 <!-- <router-link tag="button" to="/logout" class="button button-secondary">{{ $t('button-logout') }}</router-link> -->
-                                <button class="button button-secondary" @click.prvent="logout()">{{ $t('button-logout') }}</button>
+                                <button class="button button-secondary" @click.prevent="logout()">{{ $t('button-logout') }}</button>
                                 <router-link tag="button" to="/reset" class="button button-secondary">{{ $t('button-reset') }}</router-link>
+                                <button class="button button-primary" @click.prevent="save()" :disabled="username === currentUser.username">{{ $t('button-save') }}</button>
                             </div>
                         </div>
 
@@ -86,7 +90,7 @@
 </template>
 
 <script>
-    import {mapState, mapGetters} from "vuex";
+    import {mapState} from "vuex";
     import ContentSection from '@/components/shared/ContentSection.vue';
     import Footer from '@/components/shared/Footer.vue';
 
@@ -101,21 +105,34 @@
                 title: this.$t('page-title')
             }
         },
+        data() {
+            return {
+                username: '',
+                errors: {
+                    username: false
+                }
+            }
+        },
         computed: {
             ...mapState({
                 user: state => state.user.user,
                 currentUser: state => state.c3s.user.currentUser,
-                loading: state => state.settings.loading,
-
-                challengeState: state => state.consts.challengeState
+                loading: state => state.settings.loading
             })
+        },
+        mounted() {
+          this.username = this.currentUser.username;
         },
         methods: {
             logout() {
                 this.$store.commit('c3s/user/SET_CURRENT_USER', null);
                 this.$store.commit('c3s/user/SET_ANON', false);
-                this.$store.commit('score/SET_SCORE', 0);
                 this.$router.push('/');
+            },
+            save() {
+                this.$store.dispatch('c3s/user/updateUser', [this.currentUser.id, { 'username':this.username } ] ).then(r => {
+                    console.log(r);
+                })
             }
         }
     }

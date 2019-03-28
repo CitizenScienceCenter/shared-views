@@ -1,7 +1,6 @@
 <i18n>
     {
     "en": {
-
     "page-title": "Privacy Policy & Terms of use",
 
     "privacy-heading": "Privacy Policy",
@@ -17,14 +16,9 @@
     "privacy-text-4-2": "We might contact you with a newsletter about the progress of the project or the activities of the Citizen Science Center Zurich.",
 
     "terms-heading": "Terms of Use",
-    "terms-text": "The major goal for the Wenker project is to make the data that you contribute available to the researchers to further scientific research.<br>You retain ownership of any contribution you make to the data (translation or transcription) and you may use, distribute or modify your individual contribution in any way you like.<br>However, by contributing to the Wenker Project, you grant us and our collaborators permission to use your contributions however we like to further this scientific goal.",
-
-    "section-newsletter-heading": "Sign up for our Newsletter"
-
+    "terms-text": "The major goal for the Wenker project is to make the data that you contribute available to the researchers to further scientific research.<br>You retain ownership of any contribution you make to the data (translation or transcription) and you may use, distribute or modify your individual contribution in any way you like.<br>However, by contributing to the Wenker Project, you grant us and our collaborators permission to use your contributions however we like to further this scientific goal."
     },
-
     "de": {
-
     "page-title": "Privacy Policy & Terms of use",
 
     "privacy-heading": "Privacy Policy",
@@ -40,10 +34,7 @@
     "privacy-text-4-2": "We might contact you with a newsletter about the progress of the project or the activities of the Citizen Science Center Zurich.",
 
     "terms-heading": "Terms of Use",
-    "terms-text": "The major goal for the Wenker project is to make the data that you contribute available to the researchers to further scientific research.<br>You retain ownership of any contribution you make to the data (translation or transcription) and you may use, distribute or modify your individual contribution in any way you like.<br>However, by contributing to the Wenker Project, you grant us and our collaborators permission to use your contributions however we like to further this scientific goal.",
-
-    "section-newsletter-heading": "Sign up for our Newsletter"
-
+    "terms-text": "The major goal for the Wenker project is to make the data that you contribute available to the researchers to further scientific research.<br>You retain ownership of any contribution you make to the data (translation or transcription) and you may use, distribute or modify your individual contribution in any way you like.<br>However, by contributing to the Wenker Project, you grant us and our collaborators permission to use your contributions however we like to further this scientific goal."
     }
     }
 </i18n>
@@ -70,7 +61,6 @@
                     </div>
                 </div>
             </div>
-
         </app-content-section>
 
         <app-content-section color="light-greyish">
@@ -86,20 +76,7 @@
 
         </app-content-section>
 
-        <app-content-section color="greyish">
-            <div class="content-wrapper">
-                <div class="row row-centered">
-                    <div class="col col-mobile-large-10">
-                        <h2 class="heading centered">{{ $t('section-newsletter-heading') }}</h2>
-                    </div>
-                </div>
-                <div class="row row-centered">
-                    <div class="col col-mobile-large-10 col-tablet-portrait-8 col-large-12">
-                        <app-newsletter-signup></app-newsletter-signup>
-                    </div>
-                </div>
-            </div>
-        </app-content-section>
+        <section-newsletter-signup></section-newsletter-signup>
 
         <app-footer :platform="platform"></app-footer>
 
@@ -109,8 +86,8 @@
 <script>
 
     import ContentSection from '@/components/shared/ContentSection.vue'
-    import NewsletterSignup from '@/components/shared/NewsletterSignup.vue'
     import Footer from '@/components/shared/Footer.vue'
+    import SectionNewsletterSignup from "@/components/shared/SectionNewsletterSignup";
 
     export default {
         name: 'Terms',
@@ -121,8 +98,8 @@
             }
         },
         components: {
+            SectionNewsletterSignup,
             'app-content-section': ContentSection,
-            'app-newsletter-signup': NewsletterSignup,
             'app-footer': Footer
         },
         metaInfo: function() {
