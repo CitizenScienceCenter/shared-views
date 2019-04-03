@@ -44,7 +44,7 @@
   .sub-navigation {
     padding: $spacing-1 0;
     overflow-x: auto;
-    background-color: $color-black-tint-97;
+    background: linear-gradient(to bottom right, rgba($color-gradient-start, 0.025), rgba($color-gradient-end, 0.025) );
 
     ul {
       display: table;
