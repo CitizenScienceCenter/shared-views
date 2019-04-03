@@ -24,29 +24,11 @@
                 default: false
             }
         },
-        mounted() {
-            this.navScroll();
-            this.setCenteredIfNeeded();
-        },
         updated() {
             if( this.$refs.subnav ) {
-                this.navScroll();
-                this.setCenteredIfNeeded();
-            }
-        },
-        methods: {
-            navScroll() {
                 this.$refs.subnav.scrollLeft = 0;
                 if( this.$refs[ this.$router.currentRoute.meta.i18n ][0].$el.offsetLeft + this.$refs[ this.$router.currentRoute.meta.i18n ][0].$el.offsetWidth > window.innerWidth ) {
                     this.$refs.subnav.scrollLeft = this.$refs[ this.$router.currentRoute.meta.i18n ][0].$el.offsetLeft;
-                }
-            },
-            setCenteredIfNeeded() {
-                if( this.$refs.navlist.offsetWidth <= window.innerWidth ) {
-                    this.$refs.subnav.classList.add('centered');
-                }
-                else {
-                    this.$refs.subnav.classList.remove('centered');
                 }
             }
         }
@@ -63,39 +45,29 @@
     padding: $spacing-1 0;
     overflow-x: auto;
     background-color: $color-black-tint-97;
-    display: flex;
-
-    &.centered {
-      justify-content: center;
-    }
-
 
     ul {
-      display: flex;
-      flex-wrap: nowrap;
+      display: table;
+      white-space: nowrap;
       box-sizing: border-box;
-
+      font-size: 0;
+      margin: auto;
       padding: 0 calc( #{$grid-margin-mobile} + #{$grid-gutter-mobile} / 2);
 
       li {
         white-space: nowrap;
-        margin: 0;
-        padding: 0;
-        margin-right: $spacing-2;
+        display: inline-block;
 
+        margin-right: $spacing-2;
         &:last-child {
           margin-right: 0;
         }
 
-        &:before {
-          display: none;
-        }
         a {
           white-space: nowrap;
           display: block;
           font-size: $font-size-small;
           color: $color-black-tint-50;
-          cursor: pointer;
           line-height: 40px;
 
           &:active {
@@ -122,7 +94,6 @@
   @media only screen and (min-width: $viewport-tablet-portrait) {
 
     .sub-navigation {
-      justify-content: center;
       ul {
         li {
           margin-right: $spacing-3;
@@ -143,7 +114,6 @@
   @media only screen and (min-width: $viewport-large) {
 
     .sub-navigation {
-
       ul {
         li {
           margin-right: $spacing-4;
