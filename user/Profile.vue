@@ -61,9 +61,6 @@
                                 <!--<p>{{ currentUser.username }}</p>-->
                             </div>
 
-                        </div>
-
-                        <div class="content-subsection">
                             <div class="button-group right-aligned">
                                 <button class="button button-primary" @click.prevent="save()" :disabled="loading || usernameCheckInProgress || username === currentUser.username || !username || errors.username">{{ $t('button-save') }}</button>
                             </div>
