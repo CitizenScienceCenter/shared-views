@@ -56,22 +56,18 @@
                             </div>
                             <div class="form-field form-field-block">
                                 <label>{{ $t('label-username') }}</label>
-                                <!--
                                 <input v-model="username" id="reg-username" name="reg-email" autocomplete="new-password" :disabled="loading" />
                                 <span class="message error" v-if="errors.username">{{ $t("error-username") }}</span>
-                                -->
-                                <p>{{ currentUser.username }}</p>
+                                <!--<p>{{ currentUser.username }}</p>-->
                             </div>
 
                         </div>
 
-                        <!--
                         <div class="content-subsection">
                             <div class="button-group right-aligned">
                                 <button class="button button-primary" @click.prevent="save()" :disabled="loading || usernameCheckInProgress || username === currentUser.username || !username || errors.username">{{ $t('button-save') }}</button>
                             </div>
                         </div>
-                        -->
                         <div class="content-subsection">
                             <div class="button-group right-aligned">
                                 <!-- <router-link tag="button" to="/logout" class="button button-secondary">{{ $t('button-logout') }}</router-link> -->
@@ -180,8 +176,9 @@
                 this.$router.push('/');
             },
             save() {
-                this.$store.dispatch('c3s/user/updateUser', [this.currentUser.id, { 'username':this.username } ] ).then(r => {
-                    console.log(r);
+
+                this.$store.dispatch('c3s/user/updateUser', [this.currentUser.id, {'username':this.username }] ).then(r => {
+                    //console.log(r);
                 })
             }
         }
