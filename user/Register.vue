@@ -40,7 +40,6 @@
 
 <script>
 
-import { mapState, mapGetters } from "vuex";
 import RegisterForm from "@/components/shared/RegisterForm.vue";
 import ContentSection from '@/components/shared/ContentSection.vue'
 import Footer from '@/components/shared/Footer.vue'
