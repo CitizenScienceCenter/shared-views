@@ -1,9 +1,9 @@
 <template>
   <div>
 
-  <div class="sub-navigation" ref="subnav">
+    <div class="sub-navigation" ref="subnav">
       <ul ref="navlist">
-        <li v-for="child in $router.options.routes.filter(x=>x.path==$route.matched[0].path)[0].children">
+        <li v-for="child in shownRoutes">
           <router-link :to="child.path" active-class="active" :ref="child.meta.i18n">{{ $t(child.meta.i18n+'.link') }}</router-link>
         </li>
       </ul>
@@ -22,6 +22,12 @@
             platform: {
                 type: Boolean,
                 default: false
+            }
+        },
+        computed: {
+            shownRoutes() {
+                let activeParentRoute = this.$router.options.routes[0].children.filter( x => x.path === this.$route.matched[1].path.split('/')[2] );
+                return activeParentRoute[0].children;
             }
         },
         updated() {
