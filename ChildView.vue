@@ -4,7 +4,7 @@
     <div class="sub-navigation" ref="subnav">
       <ul ref="navlist">
         <li v-for="child in shownRoutes">
-          <router-link :to="child.path" active-class="active" :ref="child.meta.i18n">{{ $t(child.meta.i18n+'.link') }}</router-link>
+          <router-link :to="'/'+language+'/'+activeParentRoute.path+'/'+child.path" active-class="active" :ref="child.meta.i18n">{{ $t(child.meta.i18n+'.link') }}</router-link>
         </li>
       </ul>
     </div>
@@ -16,6 +16,9 @@
 
 <script>
 
+
+    import {mapState} from 'vuex'
+
     export default {
         name: 'ChildView',
         props: {
@@ -24,19 +27,33 @@
                 default: false
             }
         },
+        data() {
+            return {
+                activeParentRoute: undefined
+            }
+        },
+        created() {
+            this.activeParentRoute = this.$router.options.routes[0].children.filter( x => x.path === this.$route.matched[1].path.split('/')[2] )[0]
+        },
         computed: {
+            ...mapState({
+                language: state => state.settings.language,
+            }),
             shownRoutes() {
-                let activeParentRoute = this.$router.options.routes[0].children.filter( x => x.path === this.$route.matched[1].path.split('/')[2] );
-                return activeParentRoute[0].children;
+                console.log('computed');
+                return this.activeParentRoute.children;
             }
         },
         updated() {
+            this.activeParentRoute = this.$router.options.routes[0].children.filter( x => x.path === this.$route.matched[1].path.split('/')[2] )[0];
+            /*
             if( this.$refs.subnav ) {
                 this.$refs.subnav.scrollLeft = 0;
                 if( this.$refs[ this.$router.currentRoute.meta.i18n ][0].$el.offsetLeft + this.$refs[ this.$router.currentRoute.meta.i18n ][0].$el.offsetWidth > window.innerWidth ) {
                     this.$refs.subnav.scrollLeft = this.$refs[ this.$router.currentRoute.meta.i18n ][0].$el.offsetLeft;
                 }
             }
+            */
         }
     }
 
