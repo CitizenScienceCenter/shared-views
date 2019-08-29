@@ -20,13 +20,13 @@
 
     "de": {
 
-    "page-title": "Dein Profil",
+    "page-title": "Ihr Profil",
 
-    "heading": "Dein Profil",
+    "heading": "Ihr Profil",
     "label-username": "Benutzername",
     "label-email": "Email",
 
-    "thanks": "Vielen Dank für Deine Hilfe!",
+    "thanks": "Vielen Dank für Ihre Hilfe!",
     "button-logout": "Ausloggen",
     "button-reset": "Passwort zurücksetzen",
     "button-save": "Speichern",

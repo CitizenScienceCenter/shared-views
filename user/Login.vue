@@ -14,7 +14,7 @@
 
   "page-title": "Anmelden / Registrieren",
 
-  "heading-register": "Noch keinen Login? Erstelle deinen Account",
+  "heading-register": "Noch keinen Login? Erstellen Sie Ihren Account",
   "heading-login": "Anmelden"
 
   }

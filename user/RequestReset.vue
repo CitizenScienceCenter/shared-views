@@ -21,7 +21,7 @@
   "label-email": "Email",
   "button-reset": "Zurücksetzen",
 
-  "info-check-mail": "In deinen Mails findest du einen Link zum zurücksetzen des Passworts."
+  "info-check-mail": "In Ihren Mails finden Sie einen Link zum zurücksetzen des Passworts."
 
   }
 
