@@ -13,6 +13,7 @@
     "label-lastname": "Last Name",
     "label-notifications": "Notifications",
     "label-center-notifications": "I want to receive information about the Citizen Science Center Zurich.",
+    "label-project-notifications": "I want to receive information about this project.",
     "label-project-notifications-prefix": "I want to receive information about the",
 
     "label-project-snakes": "Snake ID Challenge",
@@ -43,6 +44,7 @@
     "label-lastname": "Nachname",
     "label-notifications": "Benachrichtigungen",
     "label-center-notifications": "Ich möchte Informationen zum Citizen Science Center Zurich erhalten.",
+    "label-project-notifications": "Ich möchte Informationen zu diesem Projekt erhalten.",
     "label-project-notifications-prefix": "Ich möchte Informationen zum Projekt",
 
     "label-project-snakes": "Snake ID Challenge",
@@ -104,6 +106,18 @@
                                 <label for="notification-options">{{ $t("label-notifications") }}</label>
                                 <div class="options" id="notification-options">
 
+                                    <template v-if="this.projectId !== '667461b5-353e-4dae-b83b-c59b0563133b'">
+                                        <label>
+                                            <input type="checkbox" v-model="projectNotificationObject[this.projectId]">
+                                            <div class="checkbox">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                    <path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path>
+                                                </svg>
+                                            </div>
+                                            <span>{{ $t("label-project-notifications") }}</span>
+                                        </label>
+                                    </template>
+
                                     <label>
                                         <input type="checkbox" v-model="centerNotifications">
                                         <div class="checkbox">
@@ -123,18 +137,6 @@
                                                 </svg>
                                             </div>
                                             <span>{{ $t("label-project-notifications-prefix") }} <b>{{ $t( 'label-'+projectNamesI18n[projectNotification] ) }}</b> {{ $t("label-project-notifications-suffix") }}</span>
-                                        </label>
-                                    </template>
-
-                                    <template v-else>
-                                        <label>
-                                            <input type="checkbox" v-model="projectNotificationObject[this.projectId]">
-                                            <div class="checkbox">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                                    <path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path>
-                                                </svg>
-                                            </div>
-                                            <span>{{ $t("label-project-notifications-prefix") }} <b>{{ $t( 'label-'+projectNamesI18n[this.projectId] ) }}</b> {{ $t("label-project-notifications-suffix") }}</span>
                                         </label>
                                     </template>
 
