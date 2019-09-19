@@ -84,26 +84,22 @@ export default {
       success: false
     }
   },
-  computed: {
-      ...mapState({
-        currentUser: state => state.c3s.user.currentUser,
-        loading: state => state.settings.loading
-      })
-  },
-  metaInfo: function() {
-      return {
-          title: this.$t('page-title'),
-          meta: [
-              {
-                  property: 'og:title',
-                  content: this.$t('page-title'),
-                  template: '%s | '+this.$t('site-title')
-              }
-          ]
-      }
-  },
+  computed: mapState({
+    loading: state => state.settings.loading
+  }),
+    metaInfo: function() {
+        return {
+            title: this.$t('page-title'),
+            meta: [
+                {
+                    property: 'og:title',
+                    content: this.$t('page-title'),
+                    template: '%s | '+this.$t('site-title')
+                }
+            ]
+        }
+    },
   mounted() {
-    this.email = this.currentUser.email;
   },
   methods: {
 

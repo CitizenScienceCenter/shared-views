@@ -6,21 +6,8 @@
     "page-title": "Your Profile",
 
     "heading": "Your Profile",
-
-    "label-email": "Email",
     "label-username": "Username",
-    "label-firstname": "First Name",
-    "label-lastname": "Last Name",
-    "label-notifications": "Notifications",
-    "label-center-notifications": "I want to receive information about the Citizen Science Center Zurich.",
-    "label-project-notifications-prefix": "I want to receive information about the",
-
-    "label-project-snakes": "Snake ID Challenge",
-    "label-project-hatespeech": "Hate Speech",
-    "label-project-cohco": "Cause of Health",
-    "label-project-mustelids": "Mustelid Wanted",
-
-    "label-project-notifications-suffix": "Project.",
+    "label-email": "Email",
 
     "thanks": "Thanks for helping!",
     "button-logout": "Logout",
@@ -36,21 +23,8 @@
     "page-title": "Ihr Profil",
 
     "heading": "Ihr Profil",
-
-    "label-email": "Email",
     "label-username": "Benutzername",
-    "label-firstname": "Vorname",
-    "label-lastname": "Nachname",
-    "label-notifications": "Benachrichtigungen",
-    "label-center-notifications": "Ich möchte Informationen zum Citizen Science Center Zurich erhalten.",
-    "label-project-notifications-prefix": "Ich möchte Informationen zum Projekt",
-
-    "label-project-snakes": "Snake ID Challenge",
-    "label-project-hatespeech": "Hate Speech",
-    "label-project-cohco": "Cause of Health",
-    "label-project-mustelids": "Wiesel gesucht",
-
-    "label-project-notifications-suffix": "erhalten.",
+    "label-email": "Email",
 
     "thanks": "Vielen Dank für Ihre Hilfe!",
     "button-logout": "Ausloggen",
@@ -80,65 +54,11 @@
                                 <label>{{ $t('label-email') }}</label>
                                 <p>{{ currentUser.email }}</p>
                             </div>
-
                             <div class="form-field form-field-block">
                                 <label>{{ $t('label-username') }}</label>
-                                <input v-model="username" autocomplete="new-password"" />
+                                <input v-model="username" id="reg-username" name="reg-email" autocomplete="new-password" :disabled="loading" />
                                 <span class="message error" v-if="errors.username">{{ $t("error-username") }}</span>
                                 <!--<p>{{ currentUser.username }}</p>-->
-                            </div>
-
-                            <div class="form-field form-field-block">
-                                <label>{{ $t('label-firstname') }}</label>
-                                <input v-model="firstname" autocomplete="new-password" />
-                                <!--<p>{{ currentUser.username }}</p>-->
-                            </div>
-
-                            <div class="form-field form-field-block">
-                                <label>{{ $t('label-lastname') }}</label>
-                                <input v-model="lastname" autocomplete="new-password" />
-                                <!--<p>{{ currentUser.username }}</p>-->
-                            </div>
-
-                            <div class="form-field form-field-block">
-                                <label for="notification-options">{{ $t("label-notifications") }}</label>
-                                <div class="options" id="notification-options">
-
-                                    <label>
-                                        <input type="checkbox" v-model="centerNotifications">
-                                        <div class="checkbox">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                                <path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path>
-                                            </svg>
-                                        </div>
-                                        <span>{{ $t("label-center-notifications") }}</span>
-                                    </label>
-
-                                    <template v-if="this.projectId === '667461b5-353e-4dae-b83b-c59b0563133b'">
-                                        <label v-for="(projectNotification,index) in currentUser.info['project-notifications']">
-                                            <input type="checkbox" v-model="projectNotificationObject[projectNotification]">
-                                            <div class="checkbox">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                                    <path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path>
-                                                </svg>
-                                            </div>
-                                            <span>{{ $t("label-project-notifications-prefix") }} <b>{{ $t( 'label-'+projectNamesI18n[projectNotification] ) }}</b> {{ $t("label-project-notifications-suffix") }}</span>
-                                        </label>
-                                    </template>
-
-                                    <template v-else>
-                                        <label>
-                                            <input type="checkbox" v-model="projectNotificationObject[this.projectId]">
-                                            <div class="checkbox">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                                    <path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path>
-                                                </svg>
-                                            </div>
-                                            <span>{{ $t("label-project-notifications-prefix") }} <b>{{ $t( 'label-'+projectNamesI18n[this.projectId] ) }}</b> {{ $t("label-project-notifications-suffix") }}</span>
-                                        </label>
-                                    </template>
-
-                                </div>
                             </div>
 
                             <div class="button-group right-aligned">
@@ -191,16 +111,6 @@
         data() {
             return {
                 username: '',
-                firstname: '',
-                lastname: '',
-                centerNotifications: false,
-                projectNotificationObject: {},
-                projectNamesI18n: {
-                    'b04bc186-1e0e-4fd3-87b8-a25262c1c79f': 'project-snakes',
-                    'ecf805f8-5a03-4af4-9882-f70ced27ed94': 'project-hatespeech',
-                    '3f97e6cc-ede6-4a60-8582-5638668d45e1': 'project-cohco',
-                    'a7cc9fde-607c-473e-8ff5-90e86d81f9b6': 'project-mustelids'
-                },
                 errors: {
                     username: false
                 },
@@ -212,40 +122,11 @@
             ...mapState({
                 user: state => state.user.user,
                 currentUser: state => state.c3s.user.currentUser,
-                projectId: state => state.consts.projectId,
                 loading: state => state.settings.loading
             })
         },
         mounted() {
-
-            this.username = this.currentUser.username;
-
-            if( this.currentUser.info.firstname ) {
-                this.firstname = this.currentUser.info.firstname;
-            }
-            if( this.currentUser.info.lastname ) {
-                this.lastname = this.currentUser.info.lastname;
-            }
-
-            if( this.currentUser.info["center-notifications"] ) {
-                this.centerNotifications = this.currentUser.info["center-notifications"];
-            }
-
-            if( this.currentUser.info["project-notifications"] ) {
-                if( Array.isArray(this.currentUser.info["project-notifications"]) ) {
-                    for( let i=0; i<this.currentUser.info["project-notifications"].length; i++ ) {
-                        this.projectNotificationObject[ this.currentUser.info["project-notifications"][i] ] = true;
-                    }
-                }
-                else {
-                    // snake users:
-                    if( this.currentUser.info["project-notifications"] ) {
-                        this.projectNotificationObject = { 'b04bc186-1e0e-4fd3-87b8-a25262c1c79f': true };
-                    }
-                }
-            }
-
-
+          this.username = this.currentUser.username;
         },
         watch: {
             username() {
