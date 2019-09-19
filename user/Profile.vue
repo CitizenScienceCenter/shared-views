@@ -108,7 +108,7 @@
 
                                     <template v-if="this.projectId !== '667461b5-353e-4dae-b83b-c59b0563133b'">
                                         <label>
-                                            <input type="checkbox" v-model="projectNotificationObject[this.projectId]">
+                                            <input type="checkbox" v-model="projectNotificationObject[projectId]">
                                             <div class="checkbox">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                                     <path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path>
@@ -207,12 +207,13 @@
                     username: false
                 },
                 usernameCheckTimeout: undefined,
-                usernameCheckInProgress: false
+                usernameCheckInProgress: false,
+
+                saveNeeded: false
             }
         },
         computed: {
             ...mapState({
-                user: state => state.user.user,
                 currentUser: state => state.c3s.user.currentUser,
                 projectId: state => state.consts.projectId,
                 loading: state => state.settings.loading
@@ -267,6 +268,36 @@
             }
         },
         methods: {
+            getProjectNotifications() {
+                console.log('projectnotis called');
+                let entries = Object.entries( this.projectNotificationObject );
+                let projectNotifications = [];
+                for( let i=0; i<entries.length; i++ ) {
+                    console.log('iterate through projectNotificationObject');
+                    if( entries[i][1] ) {
+                        projectNotifications.push( entries[i][0] );
+                        console.log('found true');
+                    }
+                    else {
+                        console.log('found false');
+                    }
+                }
+                return projectNotifications;
+            },
+            getUserObject() {
+                console.log('userobject called');
+                let info = JSON.parse(JSON.stringify(this.currentUser.info));
+
+                info['firstname'] = this.firstname;
+                info['lastname'] = this.lastname;
+                info['center-notifications'] = this.centerNotifications;
+                info['project-notifications'] = this.getProjectNotifications();
+
+                return {
+                    'username': this.username,
+                    'info': info
+                };
+            },
             checkUsername() {
 
                 let query = {
@@ -301,10 +332,9 @@
                 this.$router.push('/');
             },
             save() {
-
-                this.$store.dispatch('c3s/user/updateUser', [this.currentUser.id, {'username':this.username }] ).then(r => {
-                    //console.log(r);
-                })
+                this.$store.dispatch('c3s/user/updateUser', [ this.currentUser.id, this.getUserObject() ] ).then(r => {
+                    console.log('user updated');
+                });
             }
         }
     }
