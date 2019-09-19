@@ -221,6 +221,8 @@
         },
         mounted() {
 
+            this.$store.dispatch('c3s/user/validate');
+
             this.username = this.currentUser.username;
 
             if( this.currentUser.info.firstname ) {
