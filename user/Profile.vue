@@ -92,13 +92,13 @@
 
                             <div class="form-field form-field-block">
                                 <label>{{ $t('label-firstname') }}</label>
-                                <input v-model="firstname" autocomplete="new-password" />
+                                <input v-model="firstname" autocomplete="new-password" placeholder="optional" />
                                 <!--<p>{{ currentUser.username }}</p>-->
                             </div>
 
                             <div class="form-field form-field-block">
                                 <label>{{ $t('label-lastname') }}</label>
-                                <input v-model="lastname" autocomplete="new-password" />
+                                <input v-model="lastname" autocomplete="new-password" placeholder="optional" />
                                 <!--<p>{{ currentUser.username }}</p>-->
                             </div>
 
@@ -221,35 +221,37 @@
         },
         mounted() {
 
-            this.$store.dispatch('c3s/user/validate');
+            this.$store.dispatch('c3s/user/validate').then(v => {
+                //update user from db
 
-            this.username = this.currentUser.username;
+                this.username = this.currentUser.username;
 
-            if( this.currentUser.info.firstname ) {
-                this.firstname = this.currentUser.info.firstname;
-            }
-            if( this.currentUser.info.lastname ) {
-                this.lastname = this.currentUser.info.lastname;
-            }
+                if( this.currentUser.info.firstname ) {
+                    this.firstname = this.currentUser.info.firstname;
+                }
+                if( this.currentUser.info.lastname ) {
+                    this.lastname = this.currentUser.info.lastname;
+                }
 
-            if( this.currentUser.info["center-notifications"] ) {
-                this.centerNotifications = this.currentUser.info["center-notifications"];
-            }
+                if( this.currentUser.info["center-notifications"] ) {
+                    this.centerNotifications = this.currentUser.info["center-notifications"];
+                }
 
-            if( this.currentUser.info["project-notifications"] ) {
-                if( Array.isArray(this.currentUser.info["project-notifications"]) ) {
-                    for( let i=0; i<this.currentUser.info["project-notifications"].length; i++ ) {
-                        this.projectNotificationObject[ this.currentUser.info["project-notifications"][i] ] = true;
+                if( this.currentUser.info["project-notifications"] ) {
+                    if( Array.isArray(this.currentUser.info["project-notifications"]) ) {
+                        for( let i=0; i<this.currentUser.info["project-notifications"].length; i++ ) {
+                            this.projectNotificationObject[ this.currentUser.info["project-notifications"][i] ] = true;
+                        }
+                    }
+                    else {
+                        // snake users:
+                        if( this.currentUser.info["project-notifications"] ) {
+                            this.projectNotificationObject = { 'b04bc186-1e0e-4fd3-87b8-a25262c1c79f': true };
+                        }
                     }
                 }
-                else {
-                    // snake users:
-                    if( this.currentUser.info["project-notifications"] ) {
-                        this.projectNotificationObject = { 'b04bc186-1e0e-4fd3-87b8-a25262c1c79f': true };
-                    }
-                }
-            }
-
+                
+            });
 
         },
         watch: {
