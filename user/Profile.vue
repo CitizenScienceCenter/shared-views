@@ -106,9 +106,10 @@
                                 <label for="notification-options">{{ $t("label-notifications") }}</label>
                                 <div class="options" id="notification-options">
 
+                                    <!--
                                     <template v-if="this.projectId !== '667461b5-353e-4dae-b83b-c59b0563133b'">
                                         <label>
-                                            <input type="checkbox" v-model="projectNotificationObject[projectId]">
+                                            <input type="checkbox" v-model="projectNotificationsStates[index][1]">
                                             <div class="checkbox">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                                     <path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path>
@@ -117,6 +118,7 @@
                                             <span>{{ $t("label-project-notifications") }}</span>
                                         </label>
                                     </template>
+                                    -->
 
                                     <label>
                                         <input type="checkbox" v-model="centerNotifications">
@@ -129,14 +131,14 @@
                                     </label>
 
                                     <template v-if="this.projectId === '667461b5-353e-4dae-b83b-c59b0563133b'">
-                                        <label v-for="projectNotification in projectNotifications">
-                                            <input type="checkbox" v-model="projectNotificationObject[projectNotification]">
+                                        <label v-for="(projectNotification,index) in projectNotificationsStates">
+                                            <input type="checkbox" v-model="projectNotificationsStates[index][1]">
                                             <div class="checkbox">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                                     <path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path>
                                                 </svg>
                                             </div>
-                                            <span>{{ $t("label-project-notifications-prefix") }} <b>{{ $t( 'label-'+projectNamesI18n[projectNotification] ) }}</b> {{ $t("label-project-notifications-suffix") }}</span>
+                                            <span>{{ $t("label-project-notifications-prefix") }} <b>{{ $t( 'label-'+projectNamesI18n[projectNotificationsStates[index][0]] ) }}</b> {{ $t("label-project-notifications-suffix") }}</span>
                                         </label>
                                     </template>
 
@@ -144,7 +146,7 @@
                             </div>
 
                             <div class="button-group right-aligned">
-                                <button class="button button-primary" @click.prevent="save()" :disabled="loading || usernameCheckInProgress || username === currentUser.username || !username || errors.username">{{ $t('button-save') }}</button>
+                                <button class="button button-primary" @click.prevent="save()" :disabled="usernameCheckInProgress || !username || errors.username || !saveNeeded">{{ $t('button-save') }}</button>
                             </div>
                         </div>
                         <div class="content-subsection">
@@ -196,8 +198,9 @@
                 firstname: '',
                 lastname: '',
                 centerNotifications: false,
+                projectNotificationsStates: [],
+                myProjectIndex: undefined,
                 projectNotifications: [],
-                projectNotificationObject: {},
                 projectNamesI18n: {
                     'b04bc186-1e0e-4fd3-87b8-a25262c1c79f': 'project-snakes',
                     'ecf805f8-5a03-4af4-9882-f70ced27ed94': 'project-hatespeech',
@@ -241,18 +244,33 @@
                 if( this.currentUser.info["project-notifications"] ) {
                     if( Array.isArray(this.currentUser.info["project-notifications"]) ) {
                         for( let i=0; i<this.currentUser.info["project-notifications"].length; i++ ) {
-                            this.projectNotificationObject[ this.currentUser.info["project-notifications"][i] ] = true;
+                            this.projectNotificationsStates.push( [ this.currentUser.info["project-notifications"][i], true ] );
                         }
                     }
                     else {
                         // snake users:
                         if( this.currentUser.info["project-notifications"] ) {
-                            this.projectNotificationObject = { 'b04bc186-1e0e-4fd3-87b8-a25262c1c79f': true };
+                            this.projectNotificationsStates.push( [ 'b04bc186-1e0e-4fd3-87b8-a25262c1c79f', true ] );
                         }
                     }
+
+                    if( this.projectId !== '667461b5-353e-4dae-b83b-c59b0563133b' ) {
+                        // if on a project page,
+                        if( this.currentUser.info["project-notifications"].indexOf( this.projectId ) === -1 ) {
+                            // but has not checked project notifications
+                            this.projectNotificationsStates.push( [ this.currentUser.info["project-notifications"][i], false ] );
+                        }
+
+                        let self = this;
+                        this.myProjectIndex = this.projectNotificationsStates.findIndex(function(element) {
+                            return element[0] === self.projectId;
+                        });
+                        console.log( 'my project index: '+this.myProjectIndex );
+                    }
+
+
                 }
 
-                this.createProjectNotifications();
 
             });
 
@@ -261,44 +279,57 @@
             username() {
                 this.errors.username = false;
 
-                this.usernameCheckInProgress = true;
-
-                if( this.username !== this.currentUser.username ) {
-                    clearTimeout( this.usernameCheckTimeout );
+                if (this.username !== this.currentUser.username) {
+                    this.usernameCheckInProgress = true;
+                    clearTimeout(this.usernameCheckTimeout);
                     var self = this;
-                    this.usernameCheckTimeout = setTimeout( function() {
+                    this.usernameCheckTimeout = setTimeout(function () {
                         self.checkUsername();
                         self.usernameCheckInProgress = false;
                     }, 500);
+
+                    this.saveNeeded = true;
+                }
+            },
+            firstname() {
+                if( this.firstname !== this.currentUser.info.firstname ) {
+                    this.saveNeeded = true;
+                }
+            },
+            lastname() {
+                if( this.lastname !== this.currentUser.info.lastname ) {
+                    this.saveNeeded = true;
+                }
+            },
+            centerNotifications() {
+                if( this.centerNotifications !== this.currentUser.info.centerNotifications ) {
+                    this.saveNeeded = true;
+                }
+            },
+            projectNotificationsStates() {
+                console.log('project notification state change');
+
+                if( this.projectNotifications.length !== 0 ) {
+                    this.saveNeeded = true;
+                }
+
+                this.projectNotifications = [];
+                for( let i=0; i<this.projectNotificationsStates.length; i++ ) {
+                    if( this.projectNotificationsStates[i][1] ) {
+                        this.projectNotifications.push( this.projectNotificationsStates[i][0] );
+                    }
                 }
 
             }
         },
         methods: {
-            createProjectNotifications() {
-                console.log('projectnotis called');
-                let entries = Object.entries( this.projectNotificationObject );
-                this.projectNotifications = [];
-                for( let i=0; i<entries.length; i++ ) {
-                    console.log('iterate through projectNotificationObject');
-                    if( entries[i][1] ) {
-                        this.projectNotifications.push( entries[i][0] );
-                        console.log('found true');
-                    }
-                    else {
-                        console.log('found false');
-                    }
-                }
-                return this.projectNotifications;
-            },
             getUserObject() {
-                console.log('userobject called');
                 let info = JSON.parse(JSON.stringify(this.currentUser.info));
 
                 info['firstname'] = this.firstname;
                 info['lastname'] = this.lastname;
                 info['center-notifications'] = this.centerNotifications;
-                info['project-notifications'] = this.createProjectNotifications();
+                info['project-notifications'] = this.projectNotifications;
 
                 return {
                     'username': this.username,
@@ -306,7 +337,6 @@
                 };
             },
             checkUsername() {
-
                 let query = {
                     'select': {
                         'fields': [
@@ -329,8 +359,6 @@
                         // email already registered
                         this.errors.username = true;
                     }
-
-                    //this.$store.commit('c3s/user/SET_ANON', true);
                 });
             },
             logout() {
