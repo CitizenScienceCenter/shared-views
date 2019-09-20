@@ -129,7 +129,7 @@
                                     </label>
 
                                     <template v-if="this.projectId === '667461b5-353e-4dae-b83b-c59b0563133b'">
-                                        <label v-for="(projectNotification,index) in currentUser.info['project-notifications']">
+                                        <label v-for="projectNotification in projectNotifications">
                                             <input type="checkbox" v-model="projectNotificationObject[projectNotification]">
                                             <div class="checkbox">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -196,6 +196,7 @@
                 firstname: '',
                 lastname: '',
                 centerNotifications: false,
+                projectNotifications: [],
                 projectNotificationObject: {},
                 projectNamesI18n: {
                     'b04bc186-1e0e-4fd3-87b8-a25262c1c79f': 'project-snakes',
@@ -250,7 +251,9 @@
                         }
                     }
                 }
-                
+
+                this.createProjectNotifications();
+
             });
 
         },
@@ -272,21 +275,21 @@
             }
         },
         methods: {
-            getProjectNotifications() {
+            createProjectNotifications() {
                 console.log('projectnotis called');
                 let entries = Object.entries( this.projectNotificationObject );
-                let projectNotifications = [];
+                this.projectNotifications = [];
                 for( let i=0; i<entries.length; i++ ) {
                     console.log('iterate through projectNotificationObject');
                     if( entries[i][1] ) {
-                        projectNotifications.push( entries[i][0] );
+                        this.projectNotifications.push( entries[i][0] );
                         console.log('found true');
                     }
                     else {
                         console.log('found false');
                     }
                 }
-                return projectNotifications;
+                return this.projectNotifications;
             },
             getUserObject() {
                 console.log('userobject called');
@@ -295,7 +298,7 @@
                 info['firstname'] = this.firstname;
                 info['lastname'] = this.lastname;
                 info['center-notifications'] = this.centerNotifications;
-                info['project-notifications'] = this.getProjectNotifications();
+                info['project-notifications'] = this.createProjectNotifications();
 
                 return {
                     'username': this.username,
