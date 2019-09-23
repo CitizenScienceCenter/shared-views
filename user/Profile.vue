@@ -27,6 +27,7 @@
     "button-logout": "Logout",
     "button-reset": "Reset Password",
     "button-save": "Save",
+    "button-save-message": "Saved",
 
     "error-username-empty": "Enter a Username",
     "error-username": "Username already in use."
@@ -58,6 +59,7 @@
     "button-logout": "Ausloggen",
     "button-reset": "Passwort zurücksetzen",
     "button-save": "Speichern",
+    "button-save-message": "Gespeichert",
 
     "error-username-empty": "Geben Sie einen Benutzernamen an",
     "error-username": "Benutzername bereits vergeben."
@@ -142,7 +144,7 @@
                             </div>
 
                             <div class="button-group right-aligned">
-                                <submit-button @click="save()" :disabled="usernameCheckInProgress || !username || errors.username || !saveNeeded || saveInProgress" :submissionInfo="showSubmissionInfo" infoMessage="Changes Saved">{{ $t('button-save') }}</submit-button>
+                                <submit-button @click="save()" :disabled="usernameCheckInProgress || !username || errors.username || !saveNeeded || saveInProgress" :submissionInfo="showSubmissionInfo" :infoMessage="$t('button-save-message')">{{ $t('button-save') }}</submit-button>
                                 <!-- <button class="button button-primary" @click.prevent="save()" :disabled="usernameCheckInProgress || !username || errors.username || !saveNeeded">{{ $t('button-save') }}</button> -->
                             </div>
                         </div>
