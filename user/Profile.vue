@@ -135,7 +135,7 @@
                                                     <path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path>
                                                 </svg>
                                             </div>
-                                            <span>{{ $t("label-project-notifications-prefix") }} <b>{{ $t( 'label-'+projectNamesI18n[projectNotificationsStates[index][0]] ) }}</b> {{ $t("label-project-notifications-suffix") }}</span>
+                                            <span>{{ $t("label-project-notifications-prefix") }} {{ $t( 'label-'+projectNamesI18n[projectNotificationsStates[index][0]] ) }} {{ $t("label-project-notifications-suffix") }}</span>
                                         </label>
                                     </template>
 
@@ -143,7 +143,8 @@
                             </div>
 
                             <div class="button-group right-aligned">
-                                <button class="button button-primary" @click.prevent="save()" :disabled="usernameCheckInProgress || !username || errors.username || !saveNeeded">{{ $t('button-save') }}</button>
+                                <submit-button @click="save()" :disabled="usernameCheckInProgress || !username || errors.username || !saveNeeded" :submissionInfo="showSubmissionInfo" infoMessage="Changes Saved">{{ $t('button-save') }}</submit-button>
+                                <!-- <button class="button button-primary" @click.prevent="save()" :disabled="usernameCheckInProgress || !username || errors.username || !saveNeeded">{{ $t('button-save') }}</button> -->
                             </div>
                         </div>
                         <div class="content-subsection">
@@ -170,10 +171,12 @@
     import {mapState} from "vuex";
     import ContentSection from '@/components/shared/ContentSection.vue';
     import Footer from '@/components/shared/Footer.vue';
+    import SubmitButton from "../../../components/shared/SubmitButton";
 
     export default {
         name: "ViewUser",
         components: {
+            SubmitButton,
             'app-content-section': ContentSection,
             'app-footer': Footer
         },
@@ -210,7 +213,8 @@
                 usernameCheckTimeout: undefined,
                 usernameCheckInProgress: false,
 
-                saveNeeded: false
+                saveNeeded: false,
+                showSubmissionInfo: false
             }
         },
         computed: {
@@ -361,6 +365,13 @@
             save() {
                 this.$store.dispatch('c3s/user/updateUser', [ this.currentUser.id, this.getUserObject() ] ).then(r => {
                     console.log('user updated');
+
+                    this.showSubmissionInfo = true;
+                    let self = this;
+                    setTimeout( function() {
+                        self.showSubmissionInfo = false;
+                        self.saveNeeded = false;
+                    }, 900 );
                 });
             }
         }
