@@ -143,7 +143,7 @@
                             </div>
 
                             <div class="button-group right-aligned">
-                                <submit-button @click="save()" :disabled="usernameCheckInProgress || !username || errors.username || !saveNeeded" :submissionInfo="showSubmissionInfo" infoMessage="Changes Saved">{{ $t('button-save') }}</submit-button>
+                                <submit-button @click="save()" :disabled="usernameCheckInProgress || !username || errors.username || !saveNeeded || saveInProgress" :submissionInfo="showSubmissionInfo" infoMessage="Changes Saved">{{ $t('button-save') }}</submit-button>
                                 <!-- <button class="button button-primary" @click.prevent="save()" :disabled="usernameCheckInProgress || !username || errors.username || !saveNeeded">{{ $t('button-save') }}</button> -->
                             </div>
                         </div>
@@ -214,6 +214,7 @@
                 usernameCheckInProgress: false,
 
                 saveNeeded: false,
+                saveInProgress: false,
                 showSubmissionInfo: false
             }
         },
@@ -363,15 +364,21 @@
                 this.$router.push('/');
             },
             save() {
+                this.saveInProgress = true;
                 this.$store.dispatch('c3s/user/updateUser', [ this.currentUser.id, this.getUserObject() ] ).then(r => {
-                    console.log('user updated');
 
-                    this.showSubmissionInfo = true;
-                    let self = this;
-                    setTimeout( function() {
-                        self.showSubmissionInfo = false;
-                        self.saveNeeded = false;
-                    }, 900 );
+                    this.$store.dispatch('c3s/user/validate').then(v => {
+
+                        this.showSubmissionInfo = true;
+                        let self = this;
+                        setTimeout( function() {
+                            self.showSubmissionInfo = false;
+                            self.saveNeeded = false;
+                            self.saveInProgress = false;
+                        }, 900 );
+
+                    });
+
                 });
             }
         }
