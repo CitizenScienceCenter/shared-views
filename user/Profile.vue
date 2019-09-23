@@ -105,8 +105,7 @@
                             <div class="form-field form-field-block">
                                 <label for="notification-options">{{ $t("label-notifications") }}</label>
                                 <div class="options" id="notification-options">
-{{projectNotificationsStates}}
-                                    <template v-if="this.projectId !== '667461b5-353e-4dae-b83b-c59b0563133b' && projectNotificationsStates.length > 0">
+                                    <template v-if="this.projectId !== '667461b5-353e-4dae-b83b-c59b0563133b' && projectNotificationsStates && projectNotificationsStates.length > 0">
                                         <label>
                                             <input type="checkbox" v-model="projectNotificationsStates[myProjectIndex][1]">
                                             <div class="checkbox">
@@ -196,7 +195,7 @@
                 firstname: '',
                 lastname: '',
                 centerNotifications: false,
-                projectNotificationsStates: [],
+                projectNotificationsStates: undefined,
                 myProjectIndex: undefined,
                 projectNotifications: [],
                 projectNamesI18n: {
@@ -239,6 +238,7 @@
                     this.centerNotifications = this.currentUser.info["center-notifications"];
                 }
 
+                this.projectNotificationsStates = [];
                 if( this.currentUser.info["project-notifications"] ) {
                     if( Array.isArray(this.currentUser.info["project-notifications"]) ) {
                         for( let i=0; i<this.currentUser.info["project-notifications"].length; i++ ) {
@@ -265,8 +265,6 @@
                             return element[0] === self.projectId;
                         });
                     }
-
-
                 }
 
 
@@ -299,25 +297,21 @@
                     this.saveNeeded = true;
                 }
             },
-            centerNotifications() {
+            centerNotifications(to, from) {
                 if( this.centerNotifications !== this.currentUser.info['center-notifications'] ) {
                     this.saveNeeded = true;
                 }
             },
             projectNotificationsStates(to,from) {
-                console.log('project notification state change');
-
-                if( to !== from ) {
-                    this.saveNeeded = true;
-                }
-
                 this.projectNotifications = [];
                 for( let i=0; i<this.projectNotificationsStates.length; i++ ) {
                     if( this.projectNotificationsStates[i][1] ) {
                         this.projectNotifications.push( this.projectNotificationsStates[i][0] );
                     }
                 }
-
+                if( from !== undefined ) {
+                    this.saveNeeded = true;
+                }
             }
         },
         methods: {
