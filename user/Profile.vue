@@ -106,7 +106,8 @@
                             <div class="form-field form-field-block">
                                 <label for="notification-options">{{ $t("label-notifications") }}</label>
                                 <div class="options" id="notification-options">
-                                    <template v-if="this.projectId !== '667461b5-353e-4dae-b83b-c59b0563133b' && projectNotificationsStates && projectNotificationsStates.length > 0">
+
+                                    <template v-if="projectId !== '667461b5-353e-4dae-b83b-c59b0563133b' && projectNotificationsStates && projectNotificationsStates.length > 0">
                                         <label>
                                             <input type="checkbox" v-model="projectNotificationsStates[myProjectIndex][1]">
                                             <div class="checkbox">
@@ -128,7 +129,7 @@
                                         <span>{{ $t("label-center-notifications") }}</span>
                                     </label>
 
-                                    <template v-if="this.projectId === '667461b5-353e-4dae-b83b-c59b0563133b'">
+                                    <template v-if="projectId === '667461b5-353e-4dae-b83b-c59b0563133b'">
                                         <label v-for="(projectNotification,index) in projectNotificationsStates">
                                             <input type="checkbox" v-model="projectNotificationsStates[index][1]">
                                             <div class="checkbox">
