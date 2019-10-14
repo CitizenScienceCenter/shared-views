@@ -273,6 +273,10 @@
                         });
                     }
                 }
+                else {
+                    this.projectNotificationsStates.push( [ this.projectId, false ] );
+                    this.myProjectIndex = 0;
+                }
 
 
             });
