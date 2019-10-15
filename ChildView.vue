@@ -40,7 +40,6 @@
                 language: state => state.settings.language,
             }),
             shownRoutes() {
-                console.log('computed');
                 return this.activeParentRoute.children;
             }
         },
