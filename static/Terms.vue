@@ -32,7 +32,7 @@
     "privacy-text-1": "All data are submitted in accordance with the Swiss Data Protection Act ( DSG ) and the EU General Data Protection Regulation ( GDPR ). All data are stored in servers within Switzerland.",
     "privacy-text-2": "At registration in the platform, <b>users</b> may choose to provide an e-mail address (registration). This e-mail address is not visible, and <b>CCCS</b> will never share email adresses, or personal details, outside of the projects a user has given explicit permission to.",
     "privacy-text-3": "<b>CCCS</b> will use users’ email address only occasionally, to announce new features, new projects, or special events. CCCS may contact users with a newsletter about the progress of the project or the activities of the Center. Users can opt-out of such communications at any time.",
-    "privacy-text-4": "<b>CCCS</b> aggregates general statistics on the use of CS Zurich platforms. For this, CCCS uses Simple Analytics, a software that collects data only associated with the user’s IP address. This includes: IP addresses, Unique views, Timestamps, User agents, URLs, referrers, device dimensions, Do Not Track. The information collected by Simple Analytics is treated according to their Privacy Policy.",
+    "privacy-text-4": "<b>CCCS</b> aggregates general statistics on the use of CS Zurich platforms. For this, <b>CCCS</b> uses Google Analytics, a software that collects data associated with the user’s IP address. The information collected by Google Analytics is treated according to their {policy}.",
     "privacy-text-5": "Temporary cookies may be used when individual CCCS pages are accessed. Temporary cookies are small files that the page stores on your computer to enable optimal use of the website; the cookies are deleted automatically when the web browser is closed. You can block the use of temporary cookies by adjusting the relevant settings in your web browser. Please note that disabling, blocking, or deactivating cookies can limit the functionality of the CCCS web pages.",
 
     "help-text-1":"For further questions on the use of data, please contact CCCS at the following address:",
@@ -74,7 +74,7 @@
     "privacy-text-1": "All data are submitted in accordance with the Swiss Data Protection Act ( DSG ) and the EU General Data Protection Regulation ( GDPR ). All data are stored in servers within Switzerland.",
     "privacy-text-2": "At registration in the platform, <b>users</b> may choose to provide an e-mail address (registration). This e-mail address is not visible, and <b>CCCS</b> will never share email adresses, or personal details, outside of the projects a user has given explicit permission to.",
     "privacy-text-3": "<b>CCCS</b> will use users’ email address only occasionally, to announce new features, new projects, or special events. CCCS may contact users with a newsletter about the progress of the project or the activities of the Center. Users can opt-out of such communications at any time.",
-    "privacy-text-4": "<b>CCCS</b> aggregates general statistics on the use of CS Zurich platforms. For this, <b>CCCS</b> uses Simple Analytics, a software that collects data only associated with the user’s IP address. This includes: IP addresses, Unique views, Timestamps, User agents, URLs, referrers, device dimensions, Do Not Track. The information collected by Simple Analytics is treated according to their Privacy Policy.",
+    "privacy-text-4": "<b>CCCS</b> aggregates general statistics on the use of CS Zurich platforms. For this, <b>CCCS</b> uses Google Analytics, a software that collects data associated with the user’s IP address. The information collected by Google Analytics is treated according to their {policy}.",
     "privacy-text-5": "Temporary cookies may be used when individual <b>CCCS</b> pages are accessed. Temporary cookies are small files that the page stores on your computer to enable optimal use of the website; the cookies are deleted automatically when the web browser is closed. You can block the use of temporary cookies by adjusting the relevant settings in your web browser. Please note that disabling, blocking, or deactivating cookies can limit the functionality of the <b>CCCS</b> web pages.",
 
     "help-text-1":"For further questions on the use of data, please contact CCCS at the following address:",
@@ -142,7 +142,10 @@
                         <p v-html="$t('privacy-text-1')"></p>
                         <p v-html="$t('privacy-text-2')"></p>
                         <p v-html="$t('privacy-text-3')"></p>
-                        <p v-html="$t('privacy-text-4')"></p>
+                         <p v-html="$t('privacy-text-4',
+                        {
+                        'policy': `<a target='_blank' href='https://policies.google.com/?hl=en-US'>Privacy Policy</a>`
+                        })"></p>
                         <p v-html="$t('privacy-text-5')"></p>
                     </div>
                 </div>
