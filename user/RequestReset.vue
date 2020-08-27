@@ -44,7 +44,7 @@
                   <input v-model="email" type="email" name="email" id="email" autocomplete="email" :disabled="loading" />
                 </div>
                 <div class="button-group right-aligned margin-bottom">
-                  <button @click.prevent="request" type="submit" class="button button-primary" :disabled="loading">{{ $t('button-reset') }}</button>
+                  <button @click.prevent="request" type="submit" class="button button-primary-main" :disabled="loading">{{ $t('button-reset') }}</button>
                 </div>
                 <p v-if="success" class="success">{{ $t('info-check-mail') }}</p>
             </form>

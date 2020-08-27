@@ -54,7 +54,7 @@
                         </div>
 
                         <div class="button-group right-aligned">
-                            <button type="submit" class="button button-primary" :disabled="loading">{{ $t('button-reset') }}</button>
+                            <button type="submit" class="button button-primary-main" :disabled="loading">{{ $t('button-reset') }}</button>
                         </div>
                         <span class="message error" v-if="error">{{error}}</span>
                     </form>

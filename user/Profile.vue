@@ -146,7 +146,7 @@
 
                             <div class="button-group right-aligned">
                                 <submit-button @click="save()" :disabled="usernameCheckInProgress || !username || errors.username || !saveNeeded || saveInProgress" :submissionInfo="showSubmissionInfo" :infoMessage="$t('button-save-message')">{{ $t('button-save') }}</submit-button>
-                                <!-- <button class="button button-primary" @click.prevent="save()" :disabled="usernameCheckInProgress || !username || errors.username || !saveNeeded">{{ $t('button-save') }}</button> -->
+                                <!-- <button class="button button-primary-main" @click.prevent="save()" :disabled="usernameCheckInProgress || !username || errors.username || !saveNeeded">{{ $t('button-save') }}</button> -->
                             </div>
                         </div>
                         <div class="content-subsection">
