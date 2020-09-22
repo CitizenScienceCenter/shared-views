@@ -2,7 +2,7 @@
   <div>
     <div class="sub-navigation" ref="subnav">
       <ul ref="navlist">
-        <li v-for="child in shownRoutes">
+        <li v-for="child in shownRoutes" :key="child.id">
           <router-link
             :to="
               '/' + language + '/' + activeParentRoute.path + '/' + child.path
