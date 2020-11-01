@@ -9,7 +9,7 @@
             "
             active-class="active"
             :ref="child.meta.i18n"
-            v-scroll-to="child.meta.anchor || 'top'"
+            v-scroll-to="child.meta.anchor || '#top'"
             >{{ $t(child.meta.i18n + ".link") }}</router-link
           >
         </li>
