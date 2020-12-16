@@ -130,7 +130,7 @@
                                     </label>
 
                                     <template v-if="projectId === '667461b5-353e-4dae-b83b-c59b0563133b'">
-                                        <label v-for="(projectNotification,index) in projectNotificationsStates">
+                                        <label v-for="(projectNotification,index) in projectNotificationsStates" v-bind:key="index">
                                             <input type="checkbox" v-model="projectNotificationsStates[index][1]">
                                             <div class="checkbox">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
