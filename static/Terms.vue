@@ -86,132 +86,138 @@
     }
 </i18n>
 <template>
-    <div>
+  <div>
+    <app-content-section>
+      <div class="content-wrapper">
+        <div class="row row-centered scroll-effect">
+          <div class="col col-large-6">
+            <h2 class="heading centered" id="projects">
+              {{ $t("terms-heading") }}
+            </h2>
+            <p
+              v-html="$t('terms-list-intro')"
+              class="reduced-bottom-margin"
+            ></p>
+            <ul>
+              <li v-html="$t('terms-list-item-1')"></li>
+              <li v-html="$t('terms-list-item-2')"></li>
+              <li v-html="$t('terms-list-item-3')"></li>
+              <li v-html="$t('terms-list-item-4')"></li>
+              <li v-html="$t('terms-list-item-5')"></li>
+            </ul>
+            <p v-html="$t('terms-text-1')"></p>
+            <p v-html="$t('terms-text-2')"></p>
+            <p v-html="$t('terms-text-3')"></p>
+            <p v-html="$t('terms-text-4')"></p>
+            <p v-html="$t('terms-text-5')"></p>
+            <p v-html="$t('terms-text-6')"></p>
+            <p v-html="$t('terms-text-7')"></p>
+            <p v-html="$t('terms-text-8')"></p>
+            <p
+              v-html="
+                $t('terms-text-9', {
+                  lab: `<a target='_blank' rel='noopener' href='https://lab.citizenscience.ch'>https://lab.citizenscience.ch</a>`,
+                })
+              "
+            ></p>
+          </div>
+        </div>
+      </div>
+    </app-content-section>
 
-        <app-content-section>
+    <app-content-section color="light-greyish">
+      <div class="content-wrapper">
+        <div class="row row-centered scroll-effect">
+          <div class="col col-large-6">
+            <h2 class="heading centered" id="projects">
+              {{ $t("research-heading") }}
+            </h2>
+            <p
+              v-html="
+                $t('research-text-1', {
+                  'link-research': `<a target='_blank' rel='noopener' href='https://ec.europa.eu/research/participants/docs/h2020-funding-guide/cross-cutting-issues/open-access-data-management/data-management_en.htm'>as open as possible, as closed as necessary</a>`,
+                })
+              "
+            ></p>
+            <p v-html="$t('research-text-2')"></p>
+          </div>
+        </div>
+      </div>
+    </app-content-section>
 
-            <div class="content-wrapper">
-                <div class="row row-centered scroll-effect">
-                    <div class="col col-large-6">
-                        <h2 class="heading centered" id="projects">{{ $t('terms-heading') }}</h2>
-                        <p v-html="$t('terms-list-intro')" class="reduced-bottom-margin"></p>
-                        <ul>
-                            <li v-html="$t('terms-list-item-1')"></li>
-                            <li v-html="$t('terms-list-item-2')"></li>
-                            <li v-html="$t('terms-list-item-3')"></li>
-                            <li v-html="$t('terms-list-item-4')"></li>
-                            <li v-html="$t('terms-list-item-5')"></li>
-                        </ul>
-                        <p v-html="$t('terms-text-1')"></p>
-                        <p v-html="$t('terms-text-2')"></p>
-                        <p v-html="$t('terms-text-3')"></p>
-                        <p v-html="$t('terms-text-4')"></p>
-                        <p v-html="$t('terms-text-5')"></p>
-                        <p v-html="$t('terms-text-6')"></p>
-                        <p v-html="$t('terms-text-7')"></p>
-                        <p v-html="$t('terms-text-8')"></p>
-                        <p v-html="$t('terms-text-9',
-                        {
-                        'lab': `<a target='_blank' href='https://lab.citizenscience.ch'>https://lab.citizenscience.ch</a>`
-                        })"></p>
-                    </div>
-                </div>
-            </div>
+    <app-content-section color="light-greyish">
+      <div class="content-wrapper">
+        <div class="row row-centered scroll-effect">
+          <div class="col col-large-6">
+            <h2 class="heading centered" id="projects">
+              {{ $t("privacy-heading") }}
+            </h2>
+            <p v-html="$t('privacy-text-1')"></p>
+            <p v-html="$t('privacy-text-2')"></p>
+            <p v-html="$t('privacy-text-3')"></p>
+            <p
+              v-html="
+                $t('privacy-text-4', {
+                  policy: `<a target='_blank' rel='noopener' href='https://policies.google.com/?hl=en-US'>Privacy Policy</a>`,
+                })
+              "
+            ></p>
+            <p v-html="$t('privacy-text-5')"></p>
+          </div>
+        </div>
+      </div>
+    </app-content-section>
 
-        </app-content-section>
+    <app-content-section>
+      <div class="content-wrapper">
+        <div class="row row-centered scroll-effect">
+          <div class="col col-large-6">
+            <span v-html="$t('help-text-1')"></span><br />
+            <span v-html="$t('help-text-2')"></span><br />
+            <span v-html="$t('help-text-3')"></span><br />
+            <span v-html="$t('help-text-4')"></span>
+          </div>
+        </div>
+      </div>
+    </app-content-section>
 
-        <app-content-section color="light-greyish">
+    <section-newsletter-signup></section-newsletter-signup>
 
-            <div class="content-wrapper">
-                <div class="row row-centered scroll-effect">
-                    <div class="col col-large-6">
-                        <h2 class="heading centered" id="projects">{{ $t('research-heading') }}</h2>
-                         <p v-html="$t('research-text-1',
-                        {
-                        'link-research': `<a target='_blank' href='https://ec.europa.eu/research/participants/docs/h2020-funding-guide/cross-cutting-issues/open-access-data-management/data-management_en.htm'>as open as possible, as closed as necessary</a>`
-                        })"></p>
-                        <p v-html="$t('research-text-2')"></p>
-                    </div>
-                </div>
-            </div>
-        </app-content-section>
-
-        <app-content-section color="light-greyish">
-
-            <div class="content-wrapper">
-                <div class="row row-centered scroll-effect">
-                    <div class="col col-large-6">
-                        <h2 class="heading centered" id="projects">{{ $t('privacy-heading') }}</h2>
-                        <p v-html="$t('privacy-text-1')"></p>
-                        <p v-html="$t('privacy-text-2')"></p>
-                        <p v-html="$t('privacy-text-3')"></p>
-                         <p v-html="$t('privacy-text-4',
-                        {
-                        'policy': `<a target='_blank' href='https://policies.google.com/?hl=en-US'>Privacy Policy</a>`
-                        })"></p>
-                        <p v-html="$t('privacy-text-5')"></p>
-                    </div>
-                </div>
-            </div>
-        </app-content-section>
-
-        
-        <app-content-section >
-
-            <div class="content-wrapper">
-                <div class="row row-centered scroll-effect">
-                    <div class="col col-large-6">
-                        <span v-html="$t('help-text-1')"></span><br>
-                        <span v-html="$t('help-text-2')"></span><br>
-                        <span v-html="$t('help-text-3')"></span><br>
-                        <span v-html="$t('help-text-4')"></span>
-                    </div>
-                </div>
-            </div>
-        </app-content-section>
-
-        <section-newsletter-signup></section-newsletter-signup>
-
-        <app-footer :platform="platform"></app-footer>
-
-    </div>
+    <app-footer :platform="platform"></app-footer>
+  </div>
 </template>
 
 <script>
+import ContentSection from "@/components/shared/ContentSection.vue";
+import Footer from "@/components/shared/Footer.vue";
+import SectionNewsletterSignup from "@/components/shared/SectionNewsletterSignup";
 
-    import ContentSection from '@/components/shared/ContentSection.vue'
-    import Footer from '@/components/shared/Footer.vue'
-    import SectionNewsletterSignup from "@/components/shared/SectionNewsletterSignup";
-
-    export default {
-        name: 'Terms',
-        props: {
-            platform: {
-                type: Boolean,
-                default: false
-            }
+export default {
+  name: "Terms",
+  props: {
+    platform: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  components: {
+    SectionNewsletterSignup,
+    "app-content-section": ContentSection,
+    "app-footer": Footer,
+  },
+  metaInfo: function() {
+    return {
+      title: this.$t("page-title"),
+      meta: [
+        {
+          property: "og:title",
+          content: this.$t("page-title"),
+          template: "%s | " + this.$t("site-title"),
         },
-        components: {
-            SectionNewsletterSignup,
-            'app-content-section': ContentSection,
-            'app-footer': Footer
-        },
-        metaInfo: function() {
-            return {
-                title: this.$t('page-title'),
-                meta: [
-                    {
-                        property: 'og:title',
-                        content: this.$t('page-title'),
-                        template: '%s | '+this.$t('site-title')
-                    }
-                ]
-            }
-        }
-    }
-
+      ],
+    };
+  },
+};
 </script>
 
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>
