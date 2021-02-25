@@ -10,6 +10,7 @@
             active-class="active"
             :ref="child.meta.i18n"
             v-scroll-to="child.meta.anchor || '#top'"
+            @click.native="tracking(child.meta.trackingInfo)"
             >{{ $t(child.meta.i18n + ".link") }}</router-link
           >
         </li>
@@ -22,6 +23,7 @@
 
 <script>
 import { mapState } from "vuex";
+import { trackEvent } from "@/assets/support";
 
 export default {
   name: "ChildView",
@@ -48,6 +50,11 @@ export default {
     shownRoutes() {
       return this.activeParentRoute.children;
     },
+  },
+  methods: {
+    tracking(info) {
+      trackEvent(this, info);
+    }
   },
   updated() {
     this.activeParentRoute = this.$router.options.routes[0].children.filter(
